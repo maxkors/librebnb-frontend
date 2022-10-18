@@ -1,13 +1,13 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-// mobile
+// mobile dev
 .css-9yjdhh-MuiDialogContent-root > div:first-child > div:first-child,
-// desktop
+// desktop dev
 .css-1yllih9-MuiPaper-root-MuiPickersPopper-paper > div:first-child > div:first-child {
-  outline: 3px solid red !important;
-  display: none;
+	outline: 3px solid red !important;
+	display: none;
 }
