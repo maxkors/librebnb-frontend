@@ -1,38 +1,38 @@
-.container {
+.searchMenu {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-  align-items: center;
+	align-items: center;
 	padding: 0 10px;
-  & > * {
-    margin-bottom: 0.5rem;
-  }
+	& > * {
+		margin-bottom: 0.5rem;
+	}
 }
 
 .autocomplete {
-  width: 100%;
-  max-width: 478px;
+	width: 100%;
+	max-width: 478px;
 }
 
 .searchButton {
-  width: 11rem;
-  height: 3.4rem;
+	width: 11rem;
+	height: 3.4rem;
 }
 
 @media (min-width: 920px) {
-	.container {
+	.searchMenu {
 		flex-direction: row;
-    align-items: stretch;
-    & > * {
-      margin-bottom: 0;
-    }
+		align-items: stretch;
+		& > * {
+			margin-bottom: 0;
+		}
 	}
 
-  .autocomplete {
-    width: 15rem;
-  }
+	.autocomplete {
+		width: 15rem;
+	}
 
-  .searchButton {
-    width: 10rem;
-  }
+	.searchButton {
+		width: 10rem;
+	}
 }
