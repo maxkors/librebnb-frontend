@@ -9,7 +9,6 @@ const GuestsMenuItem = ({ guest }: Props) => {
 	return (
 		<div className={styles.guestMenuItem}>
 			<span className={styles.guestName}>{guest}</span>
-			{/* <div className="counter"> */}
 			<Button
 				variant="outlined"
 				className={styles.counterButton}
@@ -35,7 +34,6 @@ const GuestsMenuItem = ({ guest }: Props) => {
 			>
 				+
 			</Button>
-			{/* </div> */}
 		</div>
 	);
 };
