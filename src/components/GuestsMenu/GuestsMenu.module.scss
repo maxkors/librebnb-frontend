@@ -1,16 +1,11 @@
-.guestMenu,
+.guestsMenu,
 .guestsButton {
 	width: 100%;
 	height: 3.5rem;
 }
 
-.counterButton {
-	width: 2.3rem;
-	height: 2.3rem;
-}
-
 @media (min-width: 920px) {
-	.guestMenu,
+	.guestsMenu,
 	.guestsButton {
 		width: 8rem;
 	}
