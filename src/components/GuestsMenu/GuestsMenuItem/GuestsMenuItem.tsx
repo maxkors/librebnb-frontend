@@ -1,17 +1,37 @@
 import styles from "./GuestsMenuItem.module.scss";
 import { Button } from "@mui/material";
+import { Guests } from "../../SearchForm/SearchForm";
 
 type Props = {
 	guest: string;
+	quantity: number;
+	// setGuests: (guests: Guests | ((prev: Guests) => Guests)) => void;
+	setGuests: any;
 };
 
-const GuestsMenuItem = ({ guest }: Props) => {
+const GuestsMenuItem = ({ guest, quantity, setGuests }: Props) => {
+	const decrease = () => {
+		setGuests((prev: Guests) => {
+			if (prev[guest as keyof Guests] <= 0) {
+				return prev;
+			}
+			return { ...prev, [guest]: prev[guest as keyof Guests] - 1 };
+		});
+	};
+
+	const increase = () => {
+		setGuests((prev: Guests) => {
+			return { ...prev, [guest]: prev[guest as keyof Guests] + 1 };
+		});
+	};
+
 	return (
 		<div className={styles.guestMenuItem}>
 			<span className={styles.guestName}>{guest}</span>
 			<Button
-				variant="outlined"
 				className={styles.counterButton}
+				onClick={decrease}
+				variant="outlined"
 				sx={{
 					fontSize: "1.7rem",
 					padding: 0,
@@ -21,10 +41,11 @@ const GuestsMenuItem = ({ guest }: Props) => {
 			>
 				-
 			</Button>
-			<span className={styles.value}>1</span>
+			<span className={styles.quantity}>{quantity}</span>
 			<Button
-				variant="outlined"
 				className={styles.counterButton}
+				onClick={increase}
+				variant="outlined"
 				sx={{
 					fontSize: "1.7rem",
 					padding: 0,

@@ -1,13 +1,17 @@
 .guestMenuItem {
 	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 	padding: 0.5rem 1.5rem;
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .guestName {
 	flex-grow: 1;
 	margin-right: 1.5rem;
+
+	&::first-letter {
+		text-transform: uppercase;
+	}
 }
 
 .counterButton {
@@ -15,8 +19,8 @@
 	height: 2.3rem;
 }
 
-.value {
-  width: 2rem;
-  text-align: center;
-  font-size: 1.2rem;
+.quantity {
+	width: 2rem;
+	text-align: center;
+	font-size: 1.2rem;
 }

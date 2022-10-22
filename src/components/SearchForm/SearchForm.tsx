@@ -13,12 +13,20 @@ type Place = {
 	bbox: number[];
 };
 
+export type Guests = {
+	adults: number;
+	children: number;
+	pets: number;
+};
+
 const SearchForm = () => {
 	const [inputValue, setInputValue] = useState<string>("");
 	const [places, setPlaces] = useState<Place[]>([]);
 	const [value, setValue] = useState<string>("");
 
 	const [date, setDate] = useState<DateRange<Dayjs>>([null, null]);
+
+	const [guests, setGuests] = useState<Guests>({ adults: 0, children: 0, pets: 0 });
 
 	const getPlaces = async (input: string) => {
 		const response = await fetch(
@@ -78,7 +86,7 @@ const SearchForm = () => {
 					}}
 					onClose={() => {
 						// @ts-ignore
-						setTimeout(() => document.activeElement?.blur());
+						setTimeout(() => document.activeElement.blur());
 					}}
 					renderInput={(startProps, endProps) => (
 						<>
@@ -90,11 +98,15 @@ const SearchForm = () => {
 				/>
 			</LocalizationProvider>
 
-			<GuestsMenu />
+			<GuestsMenu guests={guests} setGuests={setGuests} />
 
 			<Button
 				className={styles.searchButton}
 				variant="contained"
+				onClick={() => {
+					console.log("place: ");
+					console.log(places.find((place) => place.name === value));
+				}}
 				sx={{ padding: 0, fontSize: "1.1rem", textTransform: "none", fontWeight: "bold", color: "white" }}
 			>
 				<Search />
