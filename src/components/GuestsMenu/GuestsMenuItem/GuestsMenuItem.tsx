@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styles from "./GuestsMenuItem.module.scss";
 import { Button } from "@mui/material";
 import { Guests } from "../../SearchForm/SearchForm";
@@ -9,7 +10,7 @@ type Props = {
 	setGuests: any;
 };
 
-const GuestsMenuItem = ({ guest, quantity, setGuests }: Props) => {
+const GuestsMenuItem = memo(({ guest, quantity, setGuests }: Props) => {
 	const decrease = () => {
 		setGuests((prev: Guests) => {
 			if (prev[guest as keyof Guests] <= 0) {
@@ -57,6 +58,6 @@ const GuestsMenuItem = ({ guest, quantity, setGuests }: Props) => {
 			</Button>
 		</div>
 	);
-};
+});
 
 export default GuestsMenuItem;

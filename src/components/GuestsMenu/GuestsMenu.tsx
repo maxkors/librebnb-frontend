@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import styles from "./GuestsMenu.module.scss";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import { Button, Menu } from "@mui/material";
@@ -10,7 +10,7 @@ type Props = {
 	setGuests: (guests: Guests) => void;
 };
 
-const GuestsMenu = ({ guests, setGuests }: Props) => {
+const GuestsMenu = memo(({ guests, setGuests }: Props) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -48,6 +48,6 @@ const GuestsMenu = ({ guests, setGuests }: Props) => {
 			</Menu>
 		</div>
 	);
-};
+});
 
 export default GuestsMenu;

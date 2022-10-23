@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from "react";
+import { memo, SyntheticEvent, useState } from "react";
 import styles from "./SearchForm.module.scss";
 import { Autocomplete, Box, Button, TextField } from "@mui/material";
 import { DateRange, DateRangePicker } from "@mui/x-date-pickers-pro";
@@ -19,7 +19,7 @@ export type Guests = {
 	pets: number;
 };
 
-const SearchForm = () => {
+const SearchForm = memo(() => {
 	const [inputValue, setInputValue] = useState<string>("");
 	const [places, setPlaces] = useState<Place[]>([]);
 	const [value, setValue] = useState<string>("");
@@ -28,7 +28,7 @@ const SearchForm = () => {
 
 	const [guests, setGuests] = useState<Guests>({ adults: 0, children: 0, pets: 0 });
 
-	const getPlaces = async (input: string) => {
+	const getPlaces = async (input: string): Promise<Place[]> => {
 		const response = await fetch(
 			`https://api.mapbox.com/geocoding/v5/mapbox.places/${input}.json?proximity=ip&types=place%2Ccountry%2Clocality&access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`
 		);
@@ -86,7 +86,7 @@ const SearchForm = () => {
 					}}
 					onClose={() => {
 						// @ts-ignore
-						setTimeout(() => document.activeElement.blur());
+						setTimeout(() => document.activeElement?.blur());
 					}}
 					renderInput={(startProps, endProps) => (
 						<>
@@ -114,6 +114,6 @@ const SearchForm = () => {
 			</Button>
 		</div>
 	);
-};
+});
 
 export default SearchForm;
