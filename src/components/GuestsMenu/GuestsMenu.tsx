@@ -3,11 +3,11 @@ import styles from "./GuestsMenu.module.scss";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import { Button, Menu } from "@mui/material";
 import GuestsMenuItem from "./GuestsMenuItem";
-import { Guests } from "../SearchForm/SearchForm";
+import { Guests } from "../SearchForm";
 
 type Props = {
 	guests: Guests;
-	setGuests: (guests: Guests) => void;
+	setGuests: React.Dispatch<React.SetStateAction<Guests>>;
 };
 
 const GuestsMenu = memo(({ guests, setGuests }: Props) => {

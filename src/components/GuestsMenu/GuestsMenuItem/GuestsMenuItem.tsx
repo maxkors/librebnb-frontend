@@ -6,8 +6,7 @@ import { Guests } from "../../SearchForm/SearchForm";
 type Props = {
 	guest: string;
 	quantity: number;
-	// setGuests: (guests: Guests | ((prev: Guests) => Guests)) => void;
-	setGuests: any;
+	setGuests: React.Dispatch<React.SetStateAction<Guests>>;
 };
 
 const GuestsMenuItem = memo(({ guest, quantity, setGuests }: Props) => {
