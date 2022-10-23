@@ -22,7 +22,7 @@ export type Guests = {
 const SearchForm = memo(() => {
 	const [inputValue, setInputValue] = useState<string>("");
 	const [places, setPlaces] = useState<Place[]>([]);
-	const [value, setValue] = useState<string>("");
+	const [value, setValue] = useState<Place>({ name: "", bbox: [] });
 
 	const [date, setDate] = useState<DateRange<Dayjs>>([null, null]);
 
@@ -51,11 +51,10 @@ const SearchForm = memo(() => {
 		}
 	};
 
-	const onChange = (event: SyntheticEvent<Element, Event>, newValue: string | null) => {
+	const onChange = (event: SyntheticEvent<Element, Event>, newValue: any) => {
 		console.log("onChange: ");
 		console.log(newValue);
 		if (newValue !== null) {
-			setInputValue(newValue);
 			setValue(newValue);
 		}
 	};
@@ -68,7 +67,8 @@ const SearchForm = memo(() => {
 				onInputChange={onInputChange}
 				value={value}
 				onChange={onChange}
-				options={places.map((place) => place.name)}
+				options={places}
+				getOptionLabel={(option: any) => option.name}
 				renderInput={(params) => <TextField {...params} label="Place" />}
 				popupIcon={null}
 				freeSolo
@@ -105,7 +105,7 @@ const SearchForm = memo(() => {
 				variant="contained"
 				onClick={() => {
 					console.log("place: ");
-					console.log(places.find((place) => place.name === value));
+					console.log(value);
 				}}
 				sx={{ padding: 0, fontSize: "1.1rem", textTransform: "none", fontWeight: "bold", color: "white" }}
 			>
