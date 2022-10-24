@@ -23,6 +23,9 @@ const Autocompletion = memo(({ value, setValue }: Props) => {
 			bbox: feature.bbox,
 		}));
 
+		console.log("fetchedData: ");
+		console.log(data);
+
 		console.log("fetchedPlaces: ");
 		console.log(fetchedPlaces);
 		return fetchedPlaces;
