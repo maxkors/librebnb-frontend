@@ -3,6 +3,7 @@ import "./App.scss";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import HomePage from "./pages/HomePage";
+import SearchPage from "./pages/SearchPage";
 
 let theme = createTheme({
 	palette: {
@@ -22,6 +23,7 @@ const App = () => {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<HomePage />} />
+					<Route path="/search" element={<SearchPage />} />
 				</Routes>
 			</BrowserRouter>
 		</ThemeProvider>
