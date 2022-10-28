@@ -43,10 +43,10 @@ const SearchForm = memo(() => {
 			if (guests.adults > 0) params.set("adults", guests.adults.toString());
 			if (guests.children > 0) params.set("children", guests.children.toString());
 			if (guests.pets > 0) params.set("pets", guests.pets.toString());
-			params.set("ne_lat", place.bbox[0].toString());
-			params.set("ne_lng", place.bbox[1].toString());
-			params.set("sw_lat", place.bbox[2].toString());
-			params.set("sw_lng", place.bbox[3].toString());
+			params.set("sw_lng", place.bbox[0].toString());
+			params.set("sw_lat", place.bbox[1].toString());
+			params.set("ne_lng", place.bbox[2].toString());
+			params.set("ne_lat", place.bbox[3].toString());
 
 			navigate("/search?" + params.toString());
 		}

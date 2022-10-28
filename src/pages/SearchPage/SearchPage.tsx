@@ -2,12 +2,18 @@ import { memo, useEffect, useState } from "react";
 import styles from "./SearchPage.module.scss";
 import { useSearchParams } from "react-router-dom";
 
+export type Media = {
+	id: number;
+	fileName: string;
+};
+
 export type Room = {
 	id: number;
 	description: string;
 	price: number;
 	latitude: number;
 	longitude: number;
+	media: Media[];
 };
 
 const SearchPage = memo(() => {
@@ -32,12 +38,13 @@ const SearchPage = memo(() => {
 
 	useEffect(() => {
 		console.log("SearchPage mount");
-    // console.log(searchParams.toString());
 		const apiParams = new URLSearchParams(searchParams);
     apiParams.delete("name");
 		console.log(`${process.env.REACT_APP_ROOMS_URI}/?${apiParams.toString()}`);
-		// console.log(searchParamsToMap(searchParams));
-		getRooms(searchParams).then((rooms) => setRooms(rooms));
+		getRooms(searchParams).then((rooms) => {
+			console.log(rooms);
+			setRooms(rooms);
+		});
 	}, []);
 
 	return (
