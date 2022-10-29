@@ -1,6 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import styles from "./SearchPage.module.scss";
 import { useSearchParams } from "react-router-dom";
+import Header from "../../components/Header";
 
 export type Media = {
 	id: number;
@@ -49,7 +50,7 @@ const SearchPage = memo(() => {
 
 	return (
 		<div>
-			<p>SearchPage</p>
+			<Header />
 			<pre>{JSON.stringify(rooms, undefined, 2)}</pre>
 		</div>
 	);
