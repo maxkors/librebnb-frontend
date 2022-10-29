@@ -2,10 +2,11 @@ import { memo, useEffect, useState } from "react";
 import styles from "./SearchPage.module.scss";
 import { useSearchParams } from "react-router-dom";
 import Header from "../../components/Header";
+import ImageGallery from "react-image-gallery";
 
 export type Media = {
 	id: number;
-	fileName: string;
+	filename: string;
 };
 
 export type Room = {
@@ -40,7 +41,7 @@ const SearchPage = memo(() => {
 	useEffect(() => {
 		console.log("SearchPage mount");
 		const apiParams = new URLSearchParams(searchParams);
-    apiParams.delete("name");
+		apiParams.delete("name");
 		console.log(`${process.env.REACT_APP_ROOMS_URI}/?${apiParams.toString()}`);
 		getRooms(searchParams).then((rooms) => {
 			console.log(rooms);
@@ -49,9 +50,26 @@ const SearchPage = memo(() => {
 	}, []);
 
 	return (
-		<div>
+		<div className={styles.searchPage}>
 			<Header />
-			<pre>{JSON.stringify(rooms, undefined, 2)}</pre>
+			<div className={styles.roomList}>
+				{rooms.length > 0 &&
+					rooms.map((room, index) => (
+						<div className={styles.room}>
+							<ImageGallery
+								key={index}
+								items={room.media.map((media) => ({
+									original: "images/" + media.filename,
+									loading: "lazy",
+								}))}
+								showPlayButton={false}
+								showFullscreenButton={false}
+								showBullets={true}
+								lazyLoad={true}
+							/>
+						</div>
+					))}
+			</div>
 		</div>
 	);
 });
