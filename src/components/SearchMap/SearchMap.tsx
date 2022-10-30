@@ -18,6 +18,13 @@ const SearchMap = memo(({ rooms, SWLng, SWLat, NELng, NELat }: Props) => {
 	const mapContainer = useRef<any>(null);
 	const map = useRef<any>(null);
 
+	const createPriceMarker = (price: number) => {
+		const priceMarker = document.createElement("span");
+		priceMarker.className = styles.priceMarker;
+		priceMarker.innerText = "$" + price.toString();
+		return priceMarker;
+	};
+
 	useEffect(() => {
 		// initialize map only once
 		if (map.current) return;
@@ -32,6 +39,17 @@ const SearchMap = memo(({ rooms, SWLng, SWLat, NELng, NELat }: Props) => {
 			],
 		});
 	}, []);
+
+	useEffect(() => {
+		const markers = rooms.map((room) =>
+			new mapboxgl.Marker({ element: createPriceMarker(room.price) })
+				.setLngLat([room.longitude, room.latitude])
+				.addTo(map.current)
+		);
+		return () => {
+			markers.forEach((m) => m.remove());
+		};
+	}, [rooms]);
 
 	return (
 		<div className={styles.searchMap}>
