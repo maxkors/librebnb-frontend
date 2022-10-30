@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from "react";
 import styles from "./SearchPage.module.scss";
 import { useSearchParams } from "react-router-dom";
 import Header from "../../components/Header";
-import ImageGallery from "react-image-gallery";
+import RoomCard from "../../components/RoomCard";
 
 export type Media = {
 	id: number;
@@ -53,23 +53,9 @@ const SearchPage = memo(() => {
 		<div className={styles.searchPage}>
 			<Header />
 			<div className={styles.roomList}>
-				{rooms.length > 0 &&
-					rooms.map((room, index) => (
-						<div className={styles.room}>
-							<ImageGallery
-								key={index}
-								items={room.media.map((media) => ({
-									original: "images/" + media.filename,
-									loading: "lazy",
-								}))}
-								showPlayButton={false}
-								showFullscreenButton={false}
-								showBullets={true}
-								lazyLoad={true}
-							/>
-						</div>
-					))}
+				{rooms.length > 0 && rooms.map((room, index) => <RoomCard room={room} key={index} />)}
 			</div>
+			<div className={styles.map}></div>
 		</div>
 	);
 });

@@ -23,3 +23,25 @@
 	object-position: center center;
 	// border: 3px solid green;
 }
+
+@media (min-width: 920px) {
+	.image-gallery-icon {
+		padding: 0;
+		&:hover {
+			color: white;
+		}
+	}
+
+	.image-gallery-svg {
+		height: 3rem !important;
+		width: 2rem !important;
+	}
+
+	.image-gallery-bullet {
+		padding: 3px !important;
+		&:hover {
+			background: white !important;
+			border: 1px solid white !important;
+		}
+	}
+}

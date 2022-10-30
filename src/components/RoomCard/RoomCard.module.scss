@@ -1,0 +1,25 @@
+.room {
+  // border: 1px solid lightgray;
+  width: 100%;
+}
+
+.gallery {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.info {
+  padding: 0.3rem;
+}
+
+.description, .price {
+  padding: 0.2rem;
+  // font-size: 1rem;
+  font-weight: bold;
+}
+
+@media (min-width: 920px) {
+	.room {
+		width: calc((100% - 2rem) / 3);
+	}
+}
