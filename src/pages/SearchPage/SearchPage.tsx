@@ -52,7 +52,7 @@ const SearchPage = memo(() => {
 			console.log(rooms);
 			setRooms(rooms);
 		});
-	}, []);
+	}, [searchParams]);
 
 	return (
 		<div className={styles.searchPage}>
@@ -61,7 +61,14 @@ const SearchPage = memo(() => {
 				{rooms.length > 0 && rooms.map((room, index) => <RoomCard room={room} key={index} />)}
 			</div>
 			<div className={styles.mapWrapper}>
-				<SearchMap rooms={rooms} SWLng={bbox.SWLng} SWLat={bbox.SWLat} NELng={bbox.NELng} NELat={bbox.NELat} />
+				<SearchMap
+					rooms={rooms}
+					SWLng={bbox.SWLng}
+					SWLat={bbox.SWLat}
+					NELng={bbox.NELng}
+					NELat={bbox.NELat}
+					setSearchParams={setSearchParams}
+				/>
 			</div>
 		</div>
 	);

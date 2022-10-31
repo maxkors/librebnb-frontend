@@ -3,6 +3,7 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import styles from "./SearchMap.module.scss";
 import { Room } from "../../pages/SearchPage";
+import { createSearchParams } from "react-router-dom";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN ?? "YOUR_TOKEN";
 
@@ -12,9 +13,10 @@ type Props = {
 	SWLat: number;
 	NELng: number;
 	NELat: number;
+	setSearchParams: any;
 };
 
-const SearchMap = memo(({ rooms, SWLng, SWLat, NELng, NELat }: Props) => {
+const SearchMap = memo(({ rooms, SWLng, SWLat, NELng, NELat, setSearchParams }: Props) => {
 	const mapContainer = useRef<any>(null);
 	const map = useRef<any>(null);
 
@@ -23,6 +25,16 @@ const SearchMap = memo(({ rooms, SWLng, SWLat, NELng, NELat }: Props) => {
 		priceMarker.className = styles.priceMarker;
 		priceMarker.innerText = "$" + price.toString();
 		return priceMarker;
+	};
+
+	const updateSearchParamsBbox = (oldParams: URLSearchParams, mapBounds: any): URLSearchParams => {
+		const newParams = createSearchParams(oldParams);
+		newParams.set("sw_lng", mapBounds._sw.lng);
+		newParams.set("sw_lat", mapBounds._sw.lat);
+		newParams.set("ne_lng", mapBounds._ne.lng);
+		newParams.set("ne_lat", mapBounds._ne.lat);
+		newParams.delete("name");
+		return newParams;
 	};
 
 	useEffect(() => {
@@ -38,7 +50,21 @@ const SearchMap = memo(({ rooms, SWLng, SWLat, NELng, NELat }: Props) => {
 				[NELng, NELat],
 			],
 		});
+
+		map.current.on("dragend", () => {
+			console.log("dragend");
+			const mapBounds = map.current.getBounds();
+			console.log(mapBounds._sw.lng);
+			setSearchParams((oldParams: URLSearchParams) => updateSearchParamsBbox(oldParams, mapBounds));
+		});
 	}, []);
+
+	useEffect(() => {
+		map.current.fitBounds([
+			[SWLng, SWLat],
+			[NELng, NELat],
+		]);
+	}, [SWLng, SWLat, NELng, NELat]);
 
 	useEffect(() => {
 		const markers = rooms.map((room) =>
