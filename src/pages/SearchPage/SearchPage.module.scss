@@ -2,6 +2,7 @@
 
 .searchPage {
 	padding-top: $headerHeight;
+	position: relative;
 }
 
 .roomList {
@@ -14,13 +15,18 @@
 }
 
 .mapWrapper {
-	display: none;
+	width: 100%;
 	position: fixed;
 	top: $headerHeight;
 	right: 0;
-	width: 50%;
 	height: calc(100vh - $headerHeight);
 	background-color: #00eaff;
+}
+
+.toggle__content {
+	display: flex;
+	align-items: center;
+	column-gap: 0.25rem;
 }
 
 @media (min-width: 920px) {
@@ -30,5 +36,10 @@
 
 	.mapWrapper {
 		display: block;
+		width: 50%;
+	}
+
+	.toggle {
+		display: none !important;
 	}
 }
