@@ -1,11 +1,21 @@
-import { memo } from "react";
+import { memo, ReactElement } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 
-const Header = memo(() => {
+type Props = {
+	searchForm?: any;
+	searchFormStatus?: any;
+	show?: boolean;
+};
+
+const Header = memo(({ searchForm, searchFormStatus, show }: Props) => {
 	return (
 		<div className={styles.header}>
-			<Link to="/" className={styles.logo}>Librebnb</Link>
+			<Link to="/" className={styles.logo}>
+				Librebnb
+			</Link>
+			{searchFormStatus}
+			{show && searchForm}
 		</div>
 	);
 });

@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Autocompletion = memo(({ value, setValue }: Props) => {
-	const [inputValue, setInputValue] = useState<string>("");
+	const [inputValue, setInputValue] = useState<string>(value.name);
 	const [places, setPlaces] = useState<Place[]>([]);
 
 	const getPlaces = async (input: string): Promise<Place[]> => {

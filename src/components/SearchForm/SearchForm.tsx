@@ -4,7 +4,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { DateRange, DateRangePicker } from "@mui/x-date-pickers-pro";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { Search } from "@mui/icons-material";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import GuestsMenu from "../../components/GuestsMenu";
 import Autocompletion from "../Autocompletion";
@@ -21,10 +21,27 @@ export type Guests = {
 	pets: number;
 };
 
-const SearchForm = memo(() => {
-	const [place, setPlace] = useState<Place>({ name: "", bbox: [] });
-	const [date, setDate] = useState<DateRange<Dayjs>>([null, null]);
-	const [guests, setGuests] = useState<Guests>({ adults: 0, children: 0, pets: 0 });
+type Props = {
+	name: string;
+	SWLng: number;
+	SWLat: number;
+	NELng: number;
+	NELat: number;
+	checkin: string | null;
+	checkout: string | null;
+	adults: number;
+	children: number;
+	pets: number;
+};
+
+//TODO add memo() compare function with Lodash.isEqual for objects
+const SearchForm = memo(({ name, SWLng, SWLat, NELng, NELat, checkin, checkout, adults, children, pets }: Props) => {
+	const [place, setPlace] = useState<Place>({ name: name, bbox: [SWLng, SWLat, NELng, NELat] });
+	const [date, setDate] = useState<DateRange<Dayjs>>([
+		checkin ? dayjs(checkin) : null,
+		checkout ? dayjs(checkout) : null,
+	]);
+	const [guests, setGuests] = useState<Guests>({ adults: adults, children: children, pets: pets });
 	const navigate = useNavigate();
 
 	const onButtonClick = () => {

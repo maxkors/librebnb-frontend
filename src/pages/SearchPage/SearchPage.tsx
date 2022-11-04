@@ -4,8 +4,9 @@ import { useSearchParams } from "react-router-dom";
 import Header from "../../components/Header";
 import RoomCard from "../../components/RoomCard";
 import SearchMap from "../../components/SearchMap";
-import { Button } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import { FormatListBulletedOutlined, MapOutlined } from "@mui/icons-material";
+import SearchForm from "../../components/SearchForm";
 
 export type Media = {
 	id: number;
@@ -32,6 +33,7 @@ const SearchPage = memo(() => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [rooms, setRooms] = useState<Room[]>([]);
 	const [toggle, setToggle] = useState<boolean>(false);
+	const [showSearchForm, setShowSearchForm] = useState<boolean>(false);
 
 	const bbox: BoundingBox = {
 		SWLng: Number(searchParams.get("sw_lng") || -179.9),
@@ -78,7 +80,24 @@ const SearchPage = memo(() => {
 
 	return (
 		<div className={styles.searchPage}>
-			<Header />
+			<Header
+				show={showSearchForm}
+				searchFormStatus={<Chip label="Open Search form" onClick={() => setShowSearchForm((prev) => !prev)} />}
+				searchForm={
+					<SearchForm
+						name={searchParams.get("name") || ""}
+						SWLng={bbox.SWLng}
+						SWLat={bbox.SWLat}
+						NELng={bbox.NELng}
+						NELat={bbox.NELat}
+						checkin={searchParams.get("checkin")}
+						checkout={searchParams.get("checkout")}
+						adults={Number(searchParams.get("adults")) || 0}
+						children={Number(searchParams.get("children")) || 0}
+						pets={Number(searchParams.get("pets")) || 0}
+					/>
+				}
+			/>
 			{window.innerWidth > 920 ? List : toggle ? null : List}
 			{window.innerWidth > 920 ? Map : toggle ? Map : null}
 			<Button
