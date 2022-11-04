@@ -1,6 +1,7 @@
-.room {
-  // border: 1px solid lightgray;
+.roomCard {
   width: 100%;
+  position: relative;
+  cursor: pointer;
 }
 
 .gallery {
@@ -19,7 +20,7 @@
 }
 
 @media (min-width: 920px) {
-	.room {
+	.roomCard {
 		width: calc((100% - 2rem) / 3);
 	}
 }
