@@ -7,6 +7,7 @@ import SearchMap from "../../components/SearchMap";
 import { Backdrop, Button, Chip } from "@mui/material";
 import { FormatListBulletedOutlined, MapOutlined } from "@mui/icons-material";
 import SearchForm from "../../components/SearchForm";
+import dayjs from "dayjs";
 
 export type Media = {
 	id: number;
@@ -40,6 +41,12 @@ const SearchPage = memo(() => {
 		SWLat: Number(searchParams.get("sw_lat") || 18.8),
 		NELng: Number(searchParams.get("ne_lng") || -66.9),
 		NELat: Number(searchParams.get("ne_lat") || 71.4),
+	};
+
+	const guests = {
+		adults: Number(searchParams.get("adults") || 0),
+		children: Number(searchParams.get("children") || 0),
+		pets: Number(searchParams.get("pets") || 0),
 	};
 
 	const getRooms = async (params: URLSearchParams) => {
@@ -82,7 +89,18 @@ const SearchPage = memo(() => {
 		<div className={styles.searchPage}>
 			<Header
 				show={showSearchForm}
-				searchFormStatus={<Chip label="Open Search form" onClick={() => setShowSearchForm((prev) => !prev)} />}
+				searchFormStatus={
+					<Chip
+						label={
+							`${searchParams.get("name")?.slice(0, 6) || "area"} ` +
+							`| ${dayjs(searchParams.get("checkin")).date()}-${dayjs(searchParams.get("checkout")).date()} ` +
+							`| ${guests.adults + guests.children} guests`
+						}
+						onClick={() => setShowSearchForm((prev) => !prev)}
+						variant="outlined"
+						className={styles.searchFormStatus}
+					/>
+				}
 				searchForm={
 					<Backdrop open={showSearchForm} onClick={() => setShowSearchForm((prev) => !prev)}>
 						<div className={styles.searchFormWrapper} onClick={(e) => e.stopPropagation()}>

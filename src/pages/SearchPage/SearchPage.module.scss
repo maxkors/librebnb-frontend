@@ -5,6 +5,12 @@
 	position: relative;
 }
 
+.searchFormStatus {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+}
+
 .searchFormWrapper {
 	width: 23rem;
 	border-radius: 18px;
