@@ -22,6 +22,7 @@ export type Guests = {
 };
 
 type Props = {
+	style?: React.CSSProperties;
 	name: string;
 	SWLng: number;
 	SWLat: number;
@@ -35,7 +36,7 @@ type Props = {
 };
 
 //TODO add memo() compare function with Lodash.isEqual for objects
-const SearchForm = memo(({ name, SWLng, SWLat, NELng, NELat, checkin, checkout, adults, children, pets }: Props) => {
+const SearchForm = memo(({ style, name, SWLng, SWLat, NELng, NELat, checkin, checkout, adults, children, pets }: Props) => {
 	const [place, setPlace] = useState<Place>({ name: name, bbox: [SWLng, SWLat, NELng, NELat] });
 	const [date, setDate] = useState<DateRange<Dayjs>>([
 		checkin ? dayjs(checkin) : null,
@@ -70,7 +71,7 @@ const SearchForm = memo(({ name, SWLng, SWLat, NELng, NELat, checkin, checkout, 
 	};
 
 	return (
-		<div className={styles.searchMenu}>
+		<div className={styles.searchMenu} style={style}>
 			<Autocompletion value={place} setValue={setPlace} />
 
 			<LocalizationProvider dateAdapter={AdapterDayjs} localeText={{ start: "Check-in", end: "Check-out" }}>

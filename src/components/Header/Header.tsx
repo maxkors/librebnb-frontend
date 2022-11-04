@@ -15,7 +15,7 @@ const Header = memo(({ searchForm, searchFormStatus, show }: Props) => {
 				Librebnb
 			</Link>
 			{searchFormStatus}
-			{show && searchForm}
+			{ searchForm}
 		</div>
 	);
 });

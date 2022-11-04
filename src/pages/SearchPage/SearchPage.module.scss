@@ -5,6 +5,13 @@
 	position: relative;
 }
 
+.searchFormWrapper {
+	width: 23rem;
+	border-radius: 18px;
+	background-color: white;
+	padding: 3rem 2rem;
+}
+
 .roomList {
 	display: flex;
 	flex-wrap: wrap;
