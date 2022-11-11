@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import styles from "./SearchPage.module.scss";
 import { useSearchParams } from "react-router-dom";
 import Header from "../../components/Header";
@@ -66,6 +66,22 @@ const SearchPage = memo(() => {
 		});
 	}, [searchParams]);
 
+	const Search = (
+		<SearchForm
+			name={searchParams.get("name") || ""}
+			SWLng={bbox.SWLng}
+			SWLat={bbox.SWLat}
+			NELng={bbox.NELng}
+			NELat={bbox.NELat}
+			checkin={searchParams.get("checkin")}
+			checkout={searchParams.get("checkout")}
+			adults={Number(searchParams.get("adults")) || 0}
+			children={Number(searchParams.get("children")) || 0}
+			pets={Number(searchParams.get("pets")) || 0}
+			style={{ flexDirection: "column", alignItems: "center", minWidth: 0 }}
+		/>
+	);
+
 	const List = (
 		<div className={styles.roomList}>
 			{rooms.length > 0 && rooms.map((room, index) => <RoomCard room={room} key={index} />)}
@@ -87,40 +103,30 @@ const SearchPage = memo(() => {
 
 	return (
 		<div className={styles.searchPage}>
-			<Header
-				show={showSearchForm}
-				searchFormStatus={
-					<Chip
-						label={
-							`${searchParams.get("name")?.slice(0, 6) || "area"} ` +
-							`| ${dayjs(searchParams.get("checkin")).date()}-${dayjs(searchParams.get("checkout")).date()} ` +
-							`| ${guests.adults + guests.children} guests`
-						}
-						onClick={() => setShowSearchForm((prev) => !prev)}
-						variant="outlined"
-						className={styles.searchFormStatus}
-					/>
-				}
-				searchForm={
+			<Header>
+				<React.Fragment>
+					{window.innerWidth > 920 ? (
+						Search
+					) : (
+						<Chip
+							label={
+								`${searchParams.get("name")?.slice(0, 6) || "area"} ` +
+								`| ${dayjs(searchParams.get("checkin")).date()}-${dayjs(searchParams.get("checkout")).date()} ` +
+								`| ${guests.adults + guests.children} guests`
+							}
+							onClick={() => setShowSearchForm((prev) => !prev)}
+							variant="outlined"
+							className={styles.searchFormStatus}
+						/>
+					)}
+
 					<Backdrop open={showSearchForm} onClick={() => setShowSearchForm((prev) => !prev)}>
 						<div className={styles.searchFormWrapper} onClick={(e) => e.stopPropagation()}>
-							<SearchForm
-								name={searchParams.get("name") || ""}
-								SWLng={bbox.SWLng}
-								SWLat={bbox.SWLat}
-								NELng={bbox.NELng}
-								NELat={bbox.NELat}
-								checkin={searchParams.get("checkin")}
-								checkout={searchParams.get("checkout")}
-								adults={Number(searchParams.get("adults")) || 0}
-								children={Number(searchParams.get("children")) || 0}
-								pets={Number(searchParams.get("pets")) || 0}
-								style={{ flexDirection: "column", alignItems: "center", minWidth: 0 }}
-							/>
+							{Search}
 						</div>
 					</Backdrop>
-				}
-			/>
+				</React.Fragment>
+			</Header>
 			{window.innerWidth > 920 ? List : toggle ? null : List}
 			{window.innerWidth > 920 ? Map : toggle ? Map : null}
 			<Button
