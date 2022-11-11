@@ -69,6 +69,7 @@ const SearchPage = memo(() => {
 
 	const Search = (
 		<SearchForm
+			formSize="small"
 			name={searchParams.get("name") || ""}
 			SWLng={bbox.SWLng}
 			SWLat={bbox.SWLat}
@@ -162,16 +163,16 @@ const SearchPage = memo(() => {
 });
 
 function useWindowSize() {
-  const [size, setSize] = useState([0, 0]);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize([window.innerWidth, window.innerHeight]);
-    }
-    window.addEventListener('resize', updateSize);
-    updateSize();
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-  return size;
+	const [size, setSize] = useState([0, 0]);
+	useLayoutEffect(() => {
+		function updateSize() {
+			setSize([window.innerWidth, window.innerHeight]);
+		}
+		window.addEventListener("resize", updateSize);
+		updateSize();
+		return () => window.removeEventListener("resize", updateSize);
+	}, []);
+	return size;
 }
 
 export default SearchPage;

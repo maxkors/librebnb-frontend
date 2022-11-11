@@ -7,7 +7,7 @@
 	height: $headerHeight;
 	display: flex;
 	align-items: center;
-	padding: 0 0.5rem;
+	padding: 0 1rem;
 	font-size: 1.5rem;
 	font-weight: bold;
 	background-color: white;
@@ -16,9 +16,10 @@
 }
 
 .logo {
-	position: absolute;
+	// position: absolute;
 	text-decoration: none;
-	color: #00e08a;
+	// color: #00e08a;
+	color: #1976d2;
 	padding: 0.2rem;
 	font-size: 1.2rem;
 }

@@ -3,14 +3,15 @@ import styles from "./GuestsMenu.module.scss";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import { Button, Menu } from "@mui/material";
 import GuestsMenuItem from "./GuestsMenuItem";
-import { Guests } from "../SearchForm";
+import { ElementSize, Guests } from "../SearchForm";
 
 type Props = {
 	guests: Guests;
 	setGuests: React.Dispatch<React.SetStateAction<Guests>>;
+	size?: ElementSize
 };
 
-const GuestsMenu = memo(({ guests, setGuests }: Props) => {
+const GuestsMenu = memo(({ guests, setGuests, size }: Props) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,6 +29,7 @@ const GuestsMenu = memo(({ guests, setGuests }: Props) => {
 				variant="outlined"
 				endIcon={<KeyboardArrowDown />}
 				className={styles.guestsButton}
+				size={size}
 				sx={{
 					// borderColor: "#b9b9b9",
 					// color: "#707070",
@@ -35,6 +37,8 @@ const GuestsMenu = memo(({ guests, setGuests }: Props) => {
 					fontSize: "1rem",
 					fontWeight: "normal",
 					padding: 0,
+					height: size === "small" ? "2.5rem" : null,
+					width: size === "small" ? "100%" : null
 				}}
 				// color="secondary"
 			>

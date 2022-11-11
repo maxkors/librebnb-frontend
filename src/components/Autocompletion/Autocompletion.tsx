@@ -1,14 +1,15 @@
 import { memo, SyntheticEvent, useState } from "react";
 import styles from "./Autocompletion.module.scss";
 import { Autocomplete, TextField } from "@mui/material";
-import { Place } from "../SearchForm";
+import { ElementSize, Place } from "../SearchForm";
 
 type Props = {
 	value: Place;
 	setValue: React.Dispatch<React.SetStateAction<Place>>;
+	size?: ElementSize;
 };
 
-const Autocompletion = memo(({ value, setValue }: Props) => {
+const Autocompletion = memo(({ value, setValue, size }: Props) => {
 	const [inputValue, setInputValue] = useState<string>(value.name);
 	const [places, setPlaces] = useState<Place[]>([]);
 
@@ -60,6 +61,7 @@ const Autocompletion = memo(({ value, setValue }: Props) => {
 			freeSolo
 			blurOnSelect
 			selectOnFocus
+			size={size}
 		/>
 	);
 });
