@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useLayoutEffect, useState } from "react";
 import styles from "./SearchPage.module.scss";
 import { useSearchParams } from "react-router-dom";
 import Header from "../../components/Header";
@@ -35,6 +35,7 @@ const SearchPage = memo(() => {
 	const [rooms, setRooms] = useState<Room[]>([]);
 	const [toggle, setToggle] = useState<boolean>(false);
 	const [showSearchForm, setShowSearchForm] = useState<boolean>(false);
+	const [width, height] = useWindowSize();
 
 	const bbox: BoundingBox = {
 		SWLng: Number(searchParams.get("sw_lng") || -179.9),
@@ -105,7 +106,7 @@ const SearchPage = memo(() => {
 		<div className={styles.searchPage}>
 			<Header>
 				<React.Fragment>
-					{window.innerWidth > 920 ? (
+					{width > 920 ? (
 						Search
 					) : (
 						<Chip
@@ -127,8 +128,8 @@ const SearchPage = memo(() => {
 					</Backdrop>
 				</React.Fragment>
 			</Header>
-			{window.innerWidth > 920 ? List : toggle ? null : List}
-			{window.innerWidth > 920 ? Map : toggle ? Map : null}
+			{width > 920 ? List : toggle ? null : List}
+			{width > 920 ? Map : toggle ? Map : null}
 			<Button
 				className={styles.toggle}
 				onClick={() => setToggle((prevState) => !prevState)}
@@ -159,5 +160,18 @@ const SearchPage = memo(() => {
 		</div>
 	);
 });
+
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+}
 
 export default SearchPage;
