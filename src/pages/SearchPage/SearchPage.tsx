@@ -129,8 +129,10 @@ const SearchPage = memo(() => {
 					</Backdrop>
 				</React.Fragment>
 			</Header>
+
 			{width > 920 ? List : toggle ? null : List}
 			{width > 920 ? Map : toggle ? Map : null}
+			
 			<Button
 				className={styles.toggle}
 				onClick={() => setToggle((prevState) => !prevState)}
