@@ -1,0 +1,19 @@
+.searchFormStatus {
+	position: absolute !important;
+	left: 50%;
+	transform: translate(-50%);
+}
+
+.label {
+	display: flex;
+	align-items: center;
+	font-size: 1rem;
+
+  & span {
+    margin-left: 0.1rem;
+  }
+
+	& span:not(:last-of-type) {
+		margin-right: 0.5rem;
+	}
+}

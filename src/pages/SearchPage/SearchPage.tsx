@@ -8,6 +8,7 @@ import { Backdrop, Button, Chip } from "@mui/material";
 import { FormatListBulletedOutlined, MapOutlined } from "@mui/icons-material";
 import SearchForm from "../../components/SearchForm";
 import dayjs from "dayjs";
+import SearchFormStatus from "../../components/SearchFormStatus";
 
 export type Media = {
 	id: number;
@@ -110,15 +111,11 @@ const SearchPage = memo(() => {
 					{width > 920 ? (
 						Search
 					) : (
-						<Chip
-							label={
-								`${searchParams.get("name")?.slice(0, 6) || "area"} ` +
-								`| ${dayjs(searchParams.get("checkin")).date()}-${dayjs(searchParams.get("checkout")).date()} ` +
-								`| ${guests.adults + guests.children} guests`
-							}
-							onClick={() => setShowSearchForm((prev) => !prev)}
-							variant="outlined"
-							className={styles.searchFormStatus}
+						<SearchFormStatus
+							name={`${searchParams.get("name")?.slice(0, 6) || "area"}`}
+							dates={`${dayjs(searchParams.get("checkin")).date()}-${dayjs(searchParams.get("checkout")).date()}`}
+							guests={`${guests.adults + guests.children}`}
+							setShowSearchForm={setShowSearchForm}
 						/>
 					)}
 
@@ -132,7 +129,7 @@ const SearchPage = memo(() => {
 
 			{width > 920 ? List : toggle ? null : List}
 			{width > 920 ? Map : toggle ? Map : null}
-			
+
 			<Button
 				className={styles.toggle}
 				onClick={() => setToggle((prevState) => !prevState)}

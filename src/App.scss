@@ -24,12 +24,17 @@
 	// border: 3px solid green;
 }
 
+.image-gallery-icon {
+	display: none;
+}
+
 @media (min-width: 920px) {
 	.image-gallery-slide img {
 		height: 11rem;
 	}
 
 	.image-gallery-icon {
+		display: block;
 		padding: 0;
 		&:hover {
 			color: white;
