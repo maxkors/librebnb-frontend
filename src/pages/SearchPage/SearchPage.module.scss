@@ -12,6 +12,16 @@
 	padding: 3rem 2rem;
 }
 
+.filtersButton_desktop {
+	display: none !important;
+}
+
+.filtersWrapper {
+	width: 23rem;
+	border-radius: 18px;
+	background-color: white;
+}
+
 .roomList {
 	display: flex;
 	flex-wrap: wrap;
@@ -37,6 +47,14 @@
 }
 
 @media (min-width: 920px) {
+	.filtersButton_mobile {
+		display: none !important;
+	}
+
+	.filtersButton_desktop {
+		display: flex !important;
+	}
+
 	.roomList {
 		width: 50%;
 	}

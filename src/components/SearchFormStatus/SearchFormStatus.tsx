@@ -2,9 +2,9 @@ import { Chip, IconButton } from "@mui/material";
 import { memo } from "react";
 import styles from "./SearchFormStatus.module.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import PlaceIcon from "@mui/icons-material/Place";
-import DateRangeIcon from "@mui/icons-material/DateRange";
-import PersonIcon from "@mui/icons-material/Person";
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
+import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 
 type Props = {
 	name: string;
@@ -19,11 +19,11 @@ const SearchFormStatus = memo(({ name, dates, guests, setShowSearchForm }: Props
 			className={styles.searchFormStatus}
 			label={
 				<p className={styles.label}>
-					<PlaceIcon sx={{ fontSize: "1rem" }} />
+					<PlaceOutlinedIcon sx={{ fontSize: "1rem" }} />
 					<span>{name}</span>
-					<DateRangeIcon sx={{ fontSize: "1rem" }} />
+					<DateRangeOutlinedIcon sx={{ fontSize: "1rem" }} />
 					<span>{dates}</span>
-					<PersonIcon sx={{ fontSize: "1rem" }} />
+					<PersonOutlinedIcon sx={{ fontSize: "1rem" }} />
 					<span>{guests}</span>
 					<IconButton
 						sx={{

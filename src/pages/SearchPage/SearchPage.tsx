@@ -4,8 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import Header from "../../components/Header";
 import RoomCard from "../../components/RoomCard";
 import SearchMap from "../../components/SearchMap";
-import { Backdrop, Button, Chip } from "@mui/material";
-import { FormatListBulletedOutlined, MapOutlined } from "@mui/icons-material";
+import { Backdrop, Button, Checkbox, FormControlLabel, IconButton } from "@mui/material";
+import { FormatListBulletedOutlined, MapOutlined, TuneOutlined } from "@mui/icons-material";
 import SearchForm from "../../components/SearchForm";
 import dayjs from "dayjs";
 import SearchFormStatus from "../../components/SearchFormStatus";
@@ -36,7 +36,8 @@ const SearchPage = memo(() => {
 	const [rooms, setRooms] = useState<Room[]>([]);
 	const [toggle, setToggle] = useState<boolean>(false);
 	const [showSearchForm, setShowSearchForm] = useState<boolean>(false);
-	const [width, height] = useWindowSize();
+	const [showFilters, setShowFilters] = useState<boolean>(false);
+	const [width] = useWindowSize();
 
 	const bbox: BoundingBox = {
 		SWLng: Number(searchParams.get("sw_lng") || -179.9),
@@ -122,6 +123,56 @@ const SearchPage = memo(() => {
 					<Backdrop open={showSearchForm} onClick={() => setShowSearchForm((prev) => !prev)}>
 						<div className={styles.searchFormWrapper} onClick={(e) => e.stopPropagation()}>
 							{Search}
+						</div>
+					</Backdrop>
+
+					<IconButton
+						className={styles.filtersButton_mobile}
+						onClick={() => setShowFilters((prev) => !prev)}
+						sx={{ width: "2.5rem", height: "2.5rem", marginLeft: "auto", border: "1px solid #bbbbbb" }}
+					>
+						<TuneOutlined />
+					</IconButton>
+
+					<Button
+						className={styles.filtersButton_desktop}
+						onClick={() => setShowFilters((prev) => !prev)}
+						variant="outlined"
+						sx={{
+							marginLeft: "1.5rem",
+							textTransform: "initial",
+							fontSize: "1rem",
+							height: "2.5rem",
+							borderRadius: "20px",
+						}}
+					>
+						<TuneOutlined />
+						&nbsp;Filters
+					</Button>
+
+					<Backdrop open={showFilters} onClick={() => setShowFilters((prev) => !prev)}>
+						<div className={styles.filtersWrapper} onClick={(e) => e.stopPropagation()}>
+							<h5 style={{ borderBottom: "1px solid #bbbbbb", textAlign: "center", padding: "0.5rem 0" }}>Filters</h5>
+							<div style={{ padding: "1rem 1.5rem" }}>
+								<h5 style={{ borderBottom: "1px solid #bbbbbb", padding: "0.5rem" }}>Amenities</h5>
+								<ul>
+									<li>
+										<FormControlLabel control={<Checkbox />} label="Wifi" />
+									</li>
+									<li>
+										<FormControlLabel control={<Checkbox />} label="TV" />
+									</li>
+									<li>
+										<FormControlLabel control={<Checkbox />} label="Kitchen" />
+									</li>
+									<li>
+										<FormControlLabel control={<Checkbox />} label="Washer" />
+									</li>
+									<li>
+										<FormControlLabel control={<Checkbox />} label="Dryer" />
+									</li>
+								</ul>
+							</div>
 						</div>
 					</Backdrop>
 				</React.Fragment>

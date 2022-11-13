@@ -6,6 +6,11 @@
 	box-sizing: border-box;
 }
 
+ul,
+ol {
+	list-style: none;
+}
+
 // mobile dev
 .css-9yjdhh-MuiDialogContent-root > div:first-child > div:first-child,
 // desktop dev

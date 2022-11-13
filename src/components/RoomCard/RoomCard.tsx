@@ -10,10 +10,6 @@ type Props = {
 
 const RoomCard = memo(({ room }: Props) => (
 	<div className={styles.roomCard}>
-		<FavoriteOutlinedIcon
-			className={styles.like}
-			sx={{ position: "absolute", zIndex: 10, color: "white", right: "10px", top: "10px", fontSize: "1.8rem" }}
-		/>
 		<div className={styles.gallery}>
 			<ImageGallery
 				items={room.media.map((media: Media) => ({
@@ -30,6 +26,10 @@ const RoomCard = memo(({ room }: Props) => (
 			<p className={styles.description}>{room.description}</p>
 			<p className={styles.price}>${room.price} night</p>
 		</div>
+		<FavoriteOutlinedIcon
+			className={styles.like}
+			sx={{ position: "absolute", color: "white", right: "10px", top: "10px", fontSize: "1.8rem" }}
+		/>
 	</div>
 ));
 
