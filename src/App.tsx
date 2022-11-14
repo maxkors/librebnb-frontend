@@ -4,7 +4,7 @@ import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
-import MenuMobile from "./components/MenuMobile";
+import NavigationMobile from "./components/NavigationMobile";
 
 let theme = createTheme({
 	palette: {
@@ -26,7 +26,7 @@ const App = () => {
 					<Route path="/" element={<HomePage />} />
 					<Route path="/search" element={<SearchPage />} />
 				</Routes>
-				<MenuMobile />
+				<NavigationMobile />
 			</BrowserRouter>
 		</ThemeProvider>
 	);

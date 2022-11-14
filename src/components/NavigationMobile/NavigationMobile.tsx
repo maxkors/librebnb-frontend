@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { NavLink } from "react-router-dom";
-import styles from "./MenuMobile.module.scss";
+import styles from "./NavigationMobile.module.scss";
 import {
 	SearchOutlined,
 	FavoriteBorderOutlined,
@@ -8,9 +8,9 @@ import {
 	AccountCircleOutlined,
 } from "@mui/icons-material";
 
-const MenuMobile = memo(() => {
+const NavigationMobile = memo(() => {
 	return (
-		<nav className={styles.menuMobile}>
+		<nav className={styles.navigationMobile}>
 			<ul className={styles.list}>
 				<li className={styles.listItem}>
 					<NavLink to="/" className={styles.navLink}>
@@ -41,4 +41,4 @@ const MenuMobile = memo(() => {
 	);
 });
 
-export default MenuMobile;
+export default NavigationMobile;

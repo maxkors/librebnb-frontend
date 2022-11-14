@@ -1,4 +1,4 @@
-.menuMobile {
+.navigationMobile {
 	position: fixed;
 	bottom: 0;
 	background-color: white;
@@ -37,7 +37,7 @@
 }
 
 @media (min-width: 920px) {
-	.menuMobile {
+	.navigationMobile {
 		display: none;
 	}
 }
