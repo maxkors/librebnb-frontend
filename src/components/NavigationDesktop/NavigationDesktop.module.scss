@@ -1,0 +1,18 @@
+.navigationDesktop {
+	display: none;
+	margin-left: auto;
+}
+
+.navLink {
+	text-decoration: none;
+	color: black;
+	// display: block;
+	padding: 0.2rem 3rem 0.2rem 0;
+	// font-size: 1.1rem;
+}
+
+@media (min-width: 920px) {
+	.navigationDesktop {
+		display: block;
+	}
+}

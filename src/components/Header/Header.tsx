@@ -1,5 +1,6 @@
 import { memo, ReactNode } from "react";
 import { Link } from "react-router-dom";
+import NavigationDesktop from "../NavigationDesktop";
 import styles from "./Header.module.scss";
 import logo from "./logo.png";
 
@@ -15,6 +16,7 @@ const Header = memo(({ children }: Props) => {
 				<p className={styles.logo__text}>Librebnb</p>
 			</Link>
 			{children}
+			<NavigationDesktop />
 		</div>
 	);
 });

@@ -139,15 +139,15 @@ const SearchPage = memo(() => {
 						onClick={() => setShowFilters((prev) => !prev)}
 						variant="outlined"
 						sx={{
-							marginLeft: "1.5rem",
+							marginLeft: "1rem",
 							textTransform: "initial",
 							fontSize: "1rem",
 							height: "2.5rem",
 							borderRadius: "20px",
 						}}
+						startIcon={<TuneOutlined />}
 					>
-						<TuneOutlined />
-						&nbsp;Filters
+						Filters
 					</Button>
 
 					<Backdrop open={showFilters} onClick={() => setShowFilters((prev) => !prev)}>
