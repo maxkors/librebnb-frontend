@@ -152,7 +152,7 @@ const SearchPage = memo(() => {
 
 					<Backdrop open={showFilters} onClick={() => setShowFilters((prev) => !prev)}>
 						<div className={styles.filtersWrapper} onClick={(e) => e.stopPropagation()}>
-							<h5 style={{ borderBottom: "1px solid #bbbbbb", textAlign: "center", padding: "0.5rem 0" }}>Filters</h5>
+							<h5 style={{ borderBottom: "1px solid #bbbbbb", textAlign: "center", padding: "1rem 0" }}>Filters</h5>
 							<div style={{ padding: "1rem 1.5rem" }}>
 								<h5 style={{ borderBottom: "1px solid #bbbbbb", padding: "0.5rem" }}>Amenities</h5>
 								<ul>
@@ -187,9 +187,9 @@ const SearchPage = memo(() => {
 				variant="contained"
 				sx={{
 					position: "fixed",
-					bottom: "1.5rem",
+					bottom: "5rem",
 					left: "50%",
-					height: "2.8rem",
+					height: "2.5rem",
 					width: "6rem",
 					transform: "translate(-50%)",
 					zIndex: 10,

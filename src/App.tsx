@@ -1,9 +1,10 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, NavLink, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
+import MenuMobile from "./components/MenuMobile";
 
 let theme = createTheme({
 	palette: {
@@ -25,6 +26,7 @@ const App = () => {
 					<Route path="/" element={<HomePage />} />
 					<Route path="/search" element={<SearchPage />} />
 				</Routes>
+				<MenuMobile />
 			</BrowserRouter>
 		</ThemeProvider>
 	);
