@@ -53,7 +53,7 @@ const SearchPage = memo(() => {
 	};
 
 	const getRooms = async (params: URLSearchParams) => {
-		const response = await fetch(`${process.env.REACT_APP_ROOMS_URI}?${params}`);
+		const response = await fetch(`${process.env.REACT_APP_API}/rooms?${params}`);
 		const rooms = await response.json();
 		return rooms;
 	};
@@ -62,7 +62,7 @@ const SearchPage = memo(() => {
 		console.log("SearchPage mount");
 		const apiParams = new URLSearchParams(searchParams);
 		apiParams.delete("name");
-		console.log(`${process.env.REACT_APP_ROOMS_URI}?${apiParams.toString()}`);
+		console.log(`${process.env.REACT_APP_API}?${apiParams.toString()}`);
 		getRooms(searchParams).then((rooms) => {
 			console.log(rooms);
 			setRooms(rooms);
