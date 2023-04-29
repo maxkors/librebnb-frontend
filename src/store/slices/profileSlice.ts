@@ -4,11 +4,13 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 export type Profile = {
 	username: string;
 	email: string;
+	isLoggedIn: boolean;
 };
 
 const initialState: Profile = {
 	username: "Guest",
 	email: "",
+	isLoggedIn: false,
 };
 
 export const profileSlice = createSlice({
@@ -18,6 +20,7 @@ export const profileSlice = createSlice({
 		setProfile: (state, action: PayloadAction<Profile>) => {
 			state.username = action.payload.username;
 			state.email = action.payload.email;
+			// state = action.payload;
 		},
 		clearProfile: (state) => {
 			state.username = "Guest";

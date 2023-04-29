@@ -7,8 +7,12 @@ import {
 	ChatBubbleOutlineOutlined,
 	AccountCircleOutlined,
 } from "@mui/icons-material";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const NavigationMobile = memo(() => {
+	const username = useSelector((state: RootState) => state.profileReducer.username);
+
 	return (
 		<nav className={styles.navigationMobile}>
 			<ul className={styles.list}>
@@ -33,7 +37,7 @@ const NavigationMobile = memo(() => {
 				<li className={styles.listItem}>
 					<NavLink to="/" className={styles.navLink}>
 						<AccountCircleOutlined className={styles.icon} />
-						Profile
+						{username}
 					</NavLink>
 				</li>
 			</ul>

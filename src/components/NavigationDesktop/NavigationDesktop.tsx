@@ -3,9 +3,12 @@ import { memo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./NavigationDesktop.module.scss";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import { RootState } from "../../store";
+import { useSelector } from "react-redux";
 
 const NavigationDesktop = memo(() => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+	const username = useSelector((state: RootState) => state.profileReducer.username);
 
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -28,7 +31,7 @@ const NavigationDesktop = memo(() => {
 					fontSize: "1rem",
 				}}
 			>
-				Max
+				{username}
 			</Button>
 
 			<Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>

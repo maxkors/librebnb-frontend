@@ -1,12 +1,12 @@
-import { BrowserRouter, Link, NavLink, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
-import { Provider } from "react-redux";
-import { store } from "./store";
+import { useDispatch } from "react-redux";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import NavigationMobile from "./components/NavigationMobile";
+import { setProfile } from "./store/slices/profileSlice";
 
 let theme = createTheme({
 	palette: {
@@ -21,18 +21,31 @@ let theme = createTheme({
 });
 
 const App = () => {
+	const dispatch = useDispatch();
+
+	const getProfileDetails = async () => {
+		const response = await fetch(`${process.env.REACT_APP_API}/profile`);
+
+		if (response.ok) {
+			const profile = await response.json();
+			console.log(`Profile: `);
+			console.log(profile);
+			dispatch(setProfile({ username: profile.username, email: profile.email, isLoggedIn: true }));
+		}
+	};
+
+	getProfileDetails();
+
 	return (
-		<Provider store={store}>
-			<ThemeProvider theme={theme}>
-				<BrowserRouter>
-					<Routes>
-						<Route path="/" element={<HomePage />} />
-						<Route path="/search" element={<SearchPage />} />
-					</Routes>
-					<NavigationMobile />
-				</BrowserRouter>
-			</ThemeProvider>
-		</Provider>
+		<ThemeProvider theme={theme}>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<HomePage />} />
+					<Route path="/search" element={<SearchPage />} />
+				</Routes>
+				<NavigationMobile />
+			</BrowserRouter>
+		</ThemeProvider>
 	);
 };
 
