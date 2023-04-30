@@ -20,6 +20,7 @@ export const profileSlice = createSlice({
 		setProfile: (state, action: PayloadAction<Profile>) => {
 			state.username = action.payload.username;
 			state.email = action.payload.email;
+			state.isLoggedIn = action.payload.isLoggedIn;
 			// state = action.payload;
 		},
 		clearProfile: (state) => {
