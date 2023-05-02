@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import NavigationMobile from "./components/NavigationMobile";
 import { setProfile } from "./store/slices/profileSlice";
+import LogInPopup from "./components/LogInPopup";
 
 let theme = createTheme({
 	palette: {
@@ -45,6 +46,7 @@ const App = () => {
 				</Routes>
 				<NavigationMobile />
 			</BrowserRouter>
+			<LogInPopup />
 		</ThemeProvider>
 	);
 };

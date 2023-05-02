@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
 const NavigationMobile = memo(() => {
-	const username = useSelector((state: RootState) => state.profileReducer.username);
+	const username = useSelector((state: RootState) => state.profile.username);
 
 	return (
 		<nav className={styles.navigationMobile}>
