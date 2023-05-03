@@ -1,0 +1,23 @@
+@import "../../variables";
+
+.profilePage__container {
+	padding: calc($headerHeight) 1rem 1rem 1rem;
+}
+
+.header {
+	padding: 1rem 0;
+}
+
+.line {
+	padding: 0.5rem 0;
+}
+
+.line__data {
+	font-weight: bold;
+}
+
+@media (min-width: 920px) {
+	.logOutButton {
+		display: none !important;
+	}
+}

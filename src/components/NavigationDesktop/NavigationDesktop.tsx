@@ -1,6 +1,6 @@
 import { Button, Menu, MenuItem } from "@mui/material";
 import { memo, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./NavigationDesktop.module.scss";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { RootState } from "../../store";
@@ -13,6 +13,7 @@ const NavigationDesktop = memo(() => {
 	const profileUsername = useSelector((state: RootState) => state.profile.username);
 	const isLoggedIn = useSelector((state: RootState) => state.profile.isLoggedIn);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -31,7 +32,8 @@ const NavigationDesktop = memo(() => {
 		handleMenuClose();
 
 		try {
-			const response = await fetch("http://localhost:8080/api/logout", {
+			// const response = await fetch("http://localhost:8080/api/logout", {
+			const response = await fetch(`${process.env.REACT_APP_API}/logout`, {
 				method: "POST",
 				headers: {
 					"Access-Control-Allow-Origin": "*",
@@ -41,6 +43,7 @@ const NavigationDesktop = memo(() => {
 
 			if (response.status === 401) {
 				dispatch(clearProfile());
+				navigate("/");
 			}
 		} catch (e) {
 			console.log(e);
@@ -82,7 +85,7 @@ const NavigationDesktop = memo(() => {
 							</NavLink>
 						</MenuItem>
 						<MenuItem onClick={handleMenuClose}>
-							<NavLink to="/" className={styles.navLink}>
+							<NavLink to="/profile" className={styles.navLink}>
 								Profile
 							</NavLink>
 						</MenuItem>

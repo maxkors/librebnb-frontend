@@ -18,7 +18,8 @@ const LogInPopup = () => {
 		console.log(formData);
 
 		try {
-			const response = await fetch("http://localhost:8080/api/login", {
+			// const response = await fetch("http://localhost:8080/api/login", {
+			const response = await fetch(`${process.env.REACT_APP_API}/login`, {
 				method: "POST",
 				headers: {
 					"Access-Control-Allow-Origin": "*",

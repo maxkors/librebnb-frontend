@@ -8,6 +8,7 @@ import SearchPage from "./pages/SearchPage";
 import NavigationMobile from "./components/NavigationMobile";
 import { setProfile } from "./store/slices/profileSlice";
 import LogInPopup from "./components/LogInPopup";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 let theme = createTheme({
 	palette: {
@@ -43,6 +44,7 @@ const App = () => {
 				<Routes>
 					<Route path="/" element={<HomePage />} />
 					<Route path="/search" element={<SearchPage />} />
+					<Route path="/profile" element={<ProfilePage />} />
 				</Routes>
 				<NavigationMobile />
 			</BrowserRouter>
