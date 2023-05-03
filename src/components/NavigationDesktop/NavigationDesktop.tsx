@@ -1,12 +1,12 @@
-import { Button, Dialog, DialogTitle, Menu, MenuItem, TextField } from "@mui/material";
-import { memo, useEffect, useState } from "react";
+import { Button, Menu, MenuItem } from "@mui/material";
+import { memo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./NavigationDesktop.module.scss";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { Profile, setProfile } from "../../store/slices/profileSlice";
 import { setIsLogInPopupOpen } from "../../store/slices/popupSlice";
+import { clearProfile } from "../../store/slices/profileSlice";
 
 const NavigationDesktop = memo(() => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -14,23 +14,43 @@ const NavigationDesktop = memo(() => {
 	const isLoggedIn = useSelector((state: RootState) => state.profile.isLoggedIn);
 	const dispatch = useDispatch();
 
-	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
 	};
 
-	const handleClose = () => {
+	const handleMenuClose = () => {
 		setAnchorEl(null);
 	};
 
 	const logInOnClick = () => {
-		handleClose();
+		handleMenuClose();
 		dispatch(setIsLogInPopupOpen(true));
+	};
+
+	const logOutOnClick = async () => {
+		handleMenuClose();
+
+		try {
+			const response = await fetch("http://localhost:8080/api/logout", {
+				method: "POST",
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+				},
+				credentials: "include",
+			});
+
+			if (response.status === 401) {
+				dispatch(clearProfile());
+			}
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	return (
 		<div className={styles.navigationDesktop}>
 			<Button
-				onClick={handleClick}
+				onClick={handleMenuClick}
 				variant="outlined"
 				className={styles.navigationButton}
 				startIcon={<MenuOutlinedIcon />}
@@ -43,29 +63,30 @@ const NavigationDesktop = memo(() => {
 				{profileUsername}
 			</Button>
 
-			<Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+			<Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
 				{isLoggedIn ? (
 					<div>
-						<MenuItem onClick={handleClose}>
+						<MenuItem onClick={handleMenuClose}>
 							<NavLink to="/" className={styles.navLink}>
 								Explore
 							</NavLink>
 						</MenuItem>
-						<MenuItem onClick={handleClose}>
+						<MenuItem onClick={handleMenuClose}>
 							<NavLink to="/" className={styles.navLink}>
 								Wishlist
 							</NavLink>
 						</MenuItem>
-						<MenuItem onClick={handleClose}>
+						<MenuItem onClick={handleMenuClose}>
 							<NavLink to="/" className={styles.navLink}>
 								Inbox
 							</NavLink>
 						</MenuItem>
-						<MenuItem onClick={handleClose}>
+						<MenuItem onClick={handleMenuClose}>
 							<NavLink to="/" className={styles.navLink}>
 								Profile
 							</NavLink>
 						</MenuItem>
+						<MenuItem onClick={logOutOnClick}>Log out</MenuItem>
 					</div>
 				) : (
 					<div>

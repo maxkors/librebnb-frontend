@@ -26,6 +26,7 @@ export const profileSlice = createSlice({
 		clearProfile: (state) => {
 			state.username = "Guest";
 			state.email = "";
+			state.isLoggedIn = false;
 		},
 	},
 });
