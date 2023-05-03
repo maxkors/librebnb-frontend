@@ -75,7 +75,7 @@ const NavigationDesktop = memo(() => {
 							</NavLink>
 						</MenuItem>
 						<MenuItem onClick={handleMenuClose}>
-							<NavLink to="/" className={styles.navLink}>
+							<NavLink to="/wishlist" className={styles.navLink}>
 								Wishlist
 							</NavLink>
 						</MenuItem>

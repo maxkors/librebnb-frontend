@@ -9,6 +9,7 @@ import NavigationMobile from "./components/NavigationMobile";
 import { setProfile } from "./store/slices/profileSlice";
 import LogInPopup from "./components/LogInPopup";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import WishlistPage from "./pages/WishlistPage/WishlistPage";
 
 let theme = createTheme({
 	palette: {
@@ -44,6 +45,7 @@ const App = () => {
 				<Routes>
 					<Route path="/" element={<HomePage />} />
 					<Route path="/search" element={<SearchPage />} />
+					<Route path="/wishlist" element={<WishlistPage />} />
 					<Route path="/profile" element={<ProfilePage />} />
 				</Routes>
 				<NavigationMobile />

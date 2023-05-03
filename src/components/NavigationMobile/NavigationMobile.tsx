@@ -30,7 +30,7 @@ const NavigationMobile = memo(() => {
 					</NavLink>
 				</li>
 				<li className={styles.listItem}>
-					<NavLink to="/" className={styles.navLink}>
+					<NavLink to="/wishlist" className={styles.navLink}>
 						<FavoriteBorderOutlined className={styles.icon} />
 						Wishlist
 					</NavLink>
@@ -50,7 +50,7 @@ const NavigationMobile = memo(() => {
 					) : (
 						<div className={styles.navLink} onClick={onSignOutProfileClick}>
 							<AccountCircleOutlined className={styles.icon} />
-							{username}
+							Log in
 						</div>
 					)}
 				</li>
