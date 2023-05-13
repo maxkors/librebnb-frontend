@@ -8,7 +8,7 @@ const WishlistPage = () => {
 	const [rooms, setRooms] = useState<Room[]>([]);
 
 	const getWishedRooms = async () => {
-		const response = await fetch(`${process.env.REACT_APP_API}/rooms/favourite`);
+		const response = await fetch(`${process.env.REACT_APP_API}/rooms/favorite`);
 
 		if (response.ok) {
 			const rooms: Room[] = await response.json();

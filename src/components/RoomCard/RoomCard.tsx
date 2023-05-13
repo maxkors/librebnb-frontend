@@ -3,6 +3,7 @@ import ImageGallery from "react-image-gallery";
 import { memo } from "react";
 import { Media, Room } from "../../pages/SearchPage";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 type Props = {
 	room: Room;
@@ -26,10 +27,18 @@ const RoomCard = memo(({ room }: Props) => (
 			<p className={styles.description}>{room.description}</p>
 			<p className={styles.price}>${room.price} night</p>
 		</div>
-		<FavoriteOutlinedIcon
-			className={styles.like}
-			sx={{ position: "absolute", color: "white", right: "10px", top: "10px", fontSize: "1.8rem" }}
-		/>
+
+		{room.isLiked ? (
+			<FavoriteIcon
+				className={styles.like}
+				sx={{ position: "absolute", color: "red", right: "10px", top: "10px", fontSize: "1.8rem" }}
+			/>
+		) : (
+			<FavoriteOutlinedIcon
+				className={styles.like}
+				sx={{ position: "absolute", color: "white", right: "10px", top: "10px", fontSize: "1.8rem" }}
+			/>
+		)}
 	</div>
 ));
 

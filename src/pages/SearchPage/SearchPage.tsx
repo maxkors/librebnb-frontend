@@ -21,6 +21,7 @@ export type Room = {
 	price: number;
 	latitude: number;
 	longitude: number;
+	isLiked: boolean;
 	media: Media[];
 };
 
