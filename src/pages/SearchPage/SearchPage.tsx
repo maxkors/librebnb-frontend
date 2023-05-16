@@ -9,6 +9,8 @@ import { FormatListBulletedOutlined, MapOutlined, TuneOutlined } from "@mui/icon
 import SearchForm from "../../components/SearchForm";
 import dayjs from "dayjs";
 import SearchFormStatus from "../../components/SearchFormStatus";
+import { useDispatch } from "react-redux";
+import { setIsLogInPopupOpen } from "../../store/slices/popupSlice";
 
 export type Media = {
 	id: number;
@@ -34,11 +36,12 @@ export type BoundingBox = {
 
 const SearchPage = memo(() => {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [rooms, setRooms] = useState<Room[]>([]);
+	const [rooms, setRooms] = useState<Room[] | any>([]);
 	const [toggle, setToggle] = useState<boolean>(false);
 	const [showSearchForm, setShowSearchForm] = useState<boolean>(false);
 	const [showFilters, setShowFilters] = useState<boolean>(false);
 	const [width] = useWindowSize();
+	const dispatch = useDispatch();
 
 	const bbox: BoundingBox = {
 		SWLng: Number(searchParams.get("sw_lng") || -179.9),
@@ -57,6 +60,30 @@ const SearchPage = memo(() => {
 		const response = await fetch(`${process.env.REACT_APP_API}/rooms?${params}`);
 		const rooms = await response.json();
 		return rooms;
+	};
+
+	const onLikeButtonClick = async (roomId: number, isRoomLiked: boolean) => {
+		try {
+			const response = await fetch(`${process.env.REACT_APP_API}/rooms/${roomId}/like`, {
+				method: isRoomLiked ? "DELETE" : "POST",
+			});
+
+			if (response.status === 401) {
+				dispatch(setIsLogInPopupOpen(true));
+			}
+
+			setRooms((prevState: Room[]) =>
+				prevState.map((r) => {
+					if (r.id === roomId) {
+						r.isLiked = !r.isLiked;
+					}
+
+					return r;
+				})
+			);
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	useEffect(() => {
@@ -89,7 +116,10 @@ const SearchPage = memo(() => {
 
 	const List = (
 		<div className={styles.roomList}>
-			{rooms.length > 0 && rooms.map((room, index) => <RoomCard room={room} key={index} />)}
+			{rooms.length > 0 &&
+				rooms.map((room: Room, index: number) => (
+					<RoomCard room={room} onLikeButtonClick={onLikeButtonClick} key={index} />
+				))}
 		</div>
 	);
 
